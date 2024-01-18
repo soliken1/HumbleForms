@@ -1,0 +1,84 @@
+﻿@model Subject
+
+<div class="card-wrapper glass-edit mt-5 p-5">
+	<form method="post" asp-action="Edit" asp-controller="Subject">
+		<div class="p-3 m-4">
+			<div class="container mb-3">
+				<div class="row">
+					<div class="col">
+						<h2 class="text-center text-light">Edit Subject Information</h2>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJDESC" class="form-control" />
+							<label asp-for="SUBJDESC"></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJUNITS" class="form-control" />
+							<label asp-for="SUBJUNITS"></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJREGOFRNG" class="form-control" />
+							<label asp-for="SUBJREGOFRNG"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJCATEGORY" class="form-control" />
+							<label asp-for="SUBJCATEGORY"></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJSTATUS" class="form-control" />
+							<label asp-for="SUBJSTATUS"></label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="mb-3 form-floating">
+							<input asp-for="SUBJCURRCODE" class="form-control" />
+							<label asp-for="SUBJCURRCODE"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mb-3 form-floating" hidden>
+				<input asp-for="SUBJCODE" class="form-control" />
+				<label asp-for="SUBJCODE"></label>
+			</div>
+			<div class="mb-3 form-floating" hidden>
+				<input asp-for="SUBJCODEPREQ" class="form-control" />
+				<label asp-for="SUBJCODEPREQ"></label>
+			</div>
+			<div class="mb-3 form-floating" hidden>
+				<input asp-for="SUBJPREQ" class="form-control" />
+				<label asp-for="SUBJPREQ"></label>
+			</div>
+			<div class="mb-3 form-floating" hidden>
+				<input asp-for="SUBJCOURSECODE" class="form-control" />
+				<label asp-for="SUBJCOURSECODE"></label>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="mb-3 mt-3 text-center">
+							<button type="submit" class="btn-lg btn-success" style="width: 200px">Update</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

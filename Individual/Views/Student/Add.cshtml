@@ -1,0 +1,219 @@
+﻿@model Student
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card glass-add pb-5">
+                <fieldset>
+                    @*ADD CHANGES*@
+                    <form method="post" asp-action="Add" asp-controller="Student" id="studentform" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <div class="container">
+                                    <div class="row text-center mt-3 mb-3">
+                                        <div class="col">
+                                            <h3 class="text-white" style="font-family: cursive">Student Info</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row text-center mt-3 mb-3">
+                                    <div class="col">
+                                        <img class="img border border-1 border-danger" id="studprofile">
+                                    </div>
+                                </div>
+                                <div class="row text-center offset-1 mt-3 mb-3">
+                                    <div class="col">
+                                        <input type="file" asp-for="STFSTUDPIC" id="fileInput" class="text-white">
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input type="text" asp-for="STFSTUDID" class="form-control formatslabel" id="studid" maxlength="8" required>
+                                                <label asp-for="STFSTUDID" for="studid"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input type="text" asp-for="STFSTUDLNAME" class="form-control formatslabel" maxlength="15" required>
+                                                <label asp-for="STFSTUDLNAME" for="lname"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <input type="text" asp-for="STFSTUDMNAME" class="form-control formatslabel" id="middlen" maxlength="15">
+                                                <label asp-for="STFSTUDMNAME" for="mname"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="form-floating mb-1">
+                                                <input type="text" asp-for="STFSTUDFNAME" class="form-control formatslabel" maxlength="15" required>
+                                                <label asp-for="STFSTUDFNAME" for="fname"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <div class="form-floating mb-1">
+                                                <input type="text" asp-for="STFSTUDCOURSE" class="form-control formatslabel" maxlength="10" required>
+                                                <label asp-for="STFSTUDCOURSE" for="course">Course</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group mx-auto" style="width: 100%">
+                                                <button type="button" id="yearddbtn" class="btn btn-secondary btn-lg dropdown-toggle form-control" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                                    Year
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-lg-end">
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedYear('1')">1st Year</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedYear('2')">2nd Year</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedYear('3')">3rd Year</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedYear('4')">4th Year</button></li>
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" asp-for="STFSTUDYEAR" id="year" maxlength="3" required>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="btn-group mx-auto" style="width: 100%">
+                                                <button type="button" id="remarksddbtn" class="btn btn-secondary btn-lg dropdown-toggle form-control" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                                    Remarks
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-lg-end">
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedRemarks('Shiftee')">Shiftee</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedRemarks('Transferee')">Transferee</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedRemarks('New')">New</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedRemarks('Old')">Old</button></li>
+                                                    <li><button class="dropdown-item" type="button" onclick="selectedRemarks('Cross-Enrollee')">Cross-Enrollee</button></li>
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" asp-for="STFSTUDREMARKS" id="remarks" maxlength="15" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container mt-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group text-center btn-container">
+                                                <input type="submit" class="btn btn-success" style="width: 100%" value="SAVE">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group text-center btn-container">
+                                                <input type="submit" class="btn btn-danger" style="width: 100%" id="cancelBtn" value="CANCEL">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function clearInputFields() {
+        $("input[name='STFSTUDID']").val('');
+        $("input[name='STFSTUDFNAME']").val('');
+        $("input[name='STFSTUDMNAME']").val('');
+        $("input[name='STFSTUDLNAME']").val('');
+        $("input[name='STFSTUDCOURSE']").val('');
+        $("input[name='STFSTUDYEAR']").val('');
+        $("input[name='STFSTUDREMARKS']").val('');
+        $("#yearddbtn").text("Year");
+        $("#remarksddbtn").text("Remarks");
+    }
+
+    window.onload = clearInputFields;
+
+    $('#cancelBtn').click(function () {
+        clearInputFields();
+        return false;
+    });
+
+    $(document).ready(function () {
+        $('#fileInput').change(function () {
+            displayImagePreview(this);
+        });
+    });
+
+    function displayImagePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#studprofile').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+
+@if (TempData.ContainsKey("FieldError"))
+{
+    <script>
+        var fieldError = '@TempData["FieldError"]';
+        Swal.fire({
+            title: 'Fields Empty!',
+            text: fieldError,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1Veu6_7u6sZT5OTGVESe_pjOS-1EJbLwA",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Fields Empty Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("DuplicateError"))
+{
+    <script>
+        var duplicateError = '@TempData["DuplicateError"]';
+        Swal.fire({
+            title: 'Duplicate Entry!',
+            text: duplicateError,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1Veu6_7u6sZT5OTGVESe_pjOS-1EJbLwA",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Duplicate Error Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("SuccessMessage"))
+{
+    <script>
+        var successMessage = '@TempData["SuccessMessage"]';
+        Swal.fire({
+            title: 'Success!',
+            text: successMessage,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1keCJ9b7wbdC3vFJw2p8i8zIYU284x9T1",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Success Image"
+        });
+    </script>
+}

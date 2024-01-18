@@ -1,0 +1,110 @@
+﻿@model List<Individual.Models.Student>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="card glass-view p-4" style="height: 525px">
+    <form method="get" asp-action="Index">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-white text-center" style="font-family: cursive">Student List</h3>
+            </div>
+            <div class="col text-center ms-5 ps-5">
+                <input type="text" id="searchStudID" name="searchStudID" placeholder="Enter ID" maxlength="15" style="width: 50%">
+            </div>
+        </div>
+    </form>
+    <div class="table-wrapper mt-3">
+        <table class="table table-hover table-dark table-striped format">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Middle Name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Remarks</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*INDEX CHANGES*@
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/images/@student.STFSTUDPICPATH" class="rounded-circle" width="40" height="40" asp-append-version="true" />
+                        </td>
+                        <td>@student.STFSTUDID</td>
+                        <td>@student.STFSTUDFNAME</td>
+                        <td>@student.STFSTUDLNAME</td>
+                        <td>@student.STFSTUDMNAME</td>
+                        <td>@student.STFSTUDCOURSE</td>
+                        <td>@student.STFSTUDYEAR</td>
+                        <td>@student.STFSTUDREMARKS</td>
+                        <td>@student.STFSTUDSTATUS</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-controller="Student" asp-action="Edit" asp-route-code="@student.STFSTUDID"
+                               class=" btn-sm btn-secondary mx-2" style="text-decoration: none">Edit</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <form asp-controller="Student" asp-action="Delete" asp-route-code="@student.STFSTUDID" method="post">
+                                    <button type="submit" class="btn-sm btn-danger mx-2" style="text-decoration: none">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
+
+@if (TempData.ContainsKey("DelMessage"))
+{
+    <script>
+        var delMessage = '@TempData["DelMessage"]';
+        Swal.fire({
+            title: 'Deleted!',
+            text: delMessage,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1Veu6_7u6sZT5OTGVESe_pjOS-1EJbLwA",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Delete Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("UpMessage"))
+{
+    <script>
+        var upMessage = '@TempData["UpMessage"]';
+        Swal.fire({
+            title: 'Updated!',
+            text: upMessage,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1keCJ9b7wbdC3vFJw2p8i8zIYU284x9T1",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Updated Image"
+        });
+    </script>
+}

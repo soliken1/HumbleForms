@@ -1,0 +1,270 @@
+﻿@model Subject
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <div class="card glass-add pb-4">
+                <fieldset>
+                    <form method="post" asp-action="Add" asp-controller="Subject" id="subjectForm">
+                        <div class="container">
+                            <div class="row text-center mt-3 mb-3">
+                                <div class="col">
+                                    <h3 class="text-white" style="font-family: cursive">Subject Info</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" asp-for="SUBJCODE" class="form-control formatslabel" maxlength="15" required>
+                                        <label asp-for="SUBJCODE" for="subjectcode">Subject Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" asp-for="SUBJDESC" class="form-control formatslabel" maxlength="50" required>
+                                        <label asp-for="SUBJDESC" for="description"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" asp-for="SUBJUNITS" class="form-control formatslabel" maxlength="1" required>
+                                        <label asp-for="SUBJUNITS" for="units"></label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input type="text" asp-for="SUBJCURRCODE" class="form-control formatslabel" required>
+                                        <label asp-for="SUBJCURRCODE" for="curcode">Curriculum Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="form-floating">
+                                        <input type="text" asp-for="SUBJCOURSECODE" class="form-control formatslabel" id="course" maxlength="10" required>
+                                        <label asp-for="SUBJCOURSECODE" for="course">Course</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <div class="btn-group mx-auto" style="width: 100%">
+                                            <button type="button" id="offeringddbtn" class="btn-lg btn-secondary dropdown-toggle form-control" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                                Offering
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                                <li><button class="dropdown-item" type="button" onclick="selectedOffering('1')">1 - First Semester</button></li>
+                                                <li><button class="dropdown-item" type="button" onclick="selectedOffering('2')">2 - Second Semester</button></li>
+                                                <li><button class="dropdown-item" type="button" onclick="selectedOffering('3')">3 - Off Semester</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" asp-for="SUBJREGOFRNG" id="offering" maxlength="1">
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <div class="btn-group mx-auto" style="width: 100%">
+                                            <button type="button" id="categoryddbtn" class="btn-lg btn-secondary dropdown-toggle form-control" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                                Category
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                                <li><button class="dropdown-item" type="button" onclick="selectedCategory('LEC')">LEC</button></li>
+                                                <li><button class="dropdown-item" type="button" onclick="selectedCategory('LAB')">LAB</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" asp-for="SUBJCATEGORY" id="category" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row text-center mb-3 mt-3">
+                                <div class="col">
+                                    <div class="form-check form-check-inline radiob">
+                                        <input class="form-check-input" type="radio" id="radioOption1" name="radBtnOptions" value="CO" asp-for="SUBJPREQ">
+                                        <label class="form-check-label text-white" for="radioOption1">CO-REQUISITE</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline radiob">
+                                        <input class="form-check-input" type="radio" id="radioOption2" name="radBtnOptions" value="PRE" asp-for="SUBJPREQ">
+                                        <label class="form-check-label text-white" for="radioOption2">PRE-REQUISITE</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="SUBJPREQ" id="selectedRequisite" name="SUBJPREQ" maxlength="3">
+                        </div>
+                        <div class="container">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <div class="form-floating mb-1">
+                                        <input type="text" class="form-control formatslabel" asp-for="SUBJCODEPREQ" maxlength="15" disabled>
+                                        <label for="requisite">Subject Code</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container mt-2">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group text-center btn-container">
+                                        <input type="submit" class="btn btn-success" style="width: 100%" value="SAVE">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group text-center btn-container">
+                                        <input type="submit" class="btn btn-danger" style="width: 100%" id="cancelBtn" value="CANCEL">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('input[name="radBtnOptions"]').on('change', function () {
+            if (this.value === 'PRE') {
+                $('#SUBJCODEPREQ').prop('disabled', false);
+                $('#selectedRequisite').val('PRE');
+                $('#SUBJCODEPREQ').val('');
+
+            } else {
+                $('#SUBJCODEPREQ').prop('disabled', true);
+                $('#SUBJCODEPREQ').val('N.A.');
+                $('#selectedRequisite').val('CO');
+            }
+        });
+    });
+
+    function clearInputFields() {
+        $("input[name='SUBJCODE']").val('');
+        $("input[name='SUBJDESC']").val('');
+        $("input[name='SUBJUNITS']").val('');
+        $("input[name='SUBJREGOFRNG']").val('');
+        $("input[name='SUBJCATEGORY']").val('');
+        $("input[name='SUBJCOURSECODE']").val('');
+        $("input[name='SUBJCURRCODE']").val('');
+        $('input[name="radBtnOptions"]').prop('checked', false);
+        $("input[name='SUBJPREQ']").val('');
+        $("input[name='SUBJCODEPREQ']").val('');
+        $("#offeringddbtn").text("Offering"); 
+        $("#courseddbtn").text("Course"); 
+    }
+
+    window.onload = clearInputFields;
+
+    $('#cancelBtn').click(function () {
+        clearInputFields();
+
+        return false;
+    });
+</script>
+
+@if (TempData.ContainsKey("FieldError"))
+{
+    <script>
+        var fieldError = '@TempData["FieldError"]';
+         title: 'Fields Empty!',
+            text: fieldError,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1Veu6_7u6sZT5OTGVESe_pjOS-1EJbLwA",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Fields Empty Image"
+    </script>
+}
+
+@if (TempData.ContainsKey("DuplicateError"))
+{
+    <script>
+        var duplicateError = '@TempData["DuplicateError"]';
+        Swal.fire({
+            title: 'Duplicate Entry!',
+            text: duplicateError,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1biTTYC_Omgo0rctxzQIUtNEjN-rxvQc5",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Duplicate Error Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("SuccessMessage"))
+{
+    <script>
+        var successMessage = '@TempData["SuccessMessage"]';
+        Swal.fire({
+            title: 'Success!',
+            text: successMessage,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1xFeA0RpqYfMaeali88WRwn2xMxutflVo",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Success Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("PreqError"))
+{
+    <script>
+        var preqErr = '@TempData["PreqError"]';
+        Swal.fire({
+            title: 'Prerequiste Error!',
+            text: preqErr,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1biTTYC_Omgo0rctxzQIUtNEjN-rxvQc5",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Requisite Error Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("RequisiteError"))
+{
+    <script>
+        var ReqErMsg = '@TempData["RequisiteError"]';
+        Swal.fire({
+            title: 'Prerequiste Error!',
+            text: ReqErMsg,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1biTTYC_Omgo0rctxzQIUtNEjN-rxvQc5",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Requisite Error Image"
+        });
+    </script>
+}
+
+@if (TempData.ContainsKey("MismatchError"))
+{
+    <script>
+        var mismatchMsg = '@TempData["MismatchError"]';
+        Swal.fire({
+            title: 'Mismatch Error!',
+            text: mismatchMsg,
+            imageUrl: "https://drive.google.com/uc?export=download&id=1biTTYC_Omgo0rctxzQIUtNEjN-rxvQc5",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Mismatch Error Image"
+        });
+    </script>
+}

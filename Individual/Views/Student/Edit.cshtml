@@ -1,0 +1,78 @@
+﻿@model Student
+
+<div class="card-wrapper glass-edit mt-5 p-5">
+    <form method="post" asp-action="Edit" asp-controller="Student">
+        <div class="p-3 m-4">
+            <div class="container mb-3">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="text-center text-light" style="font-family: cursive">Edit Student Information</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDFNAME" class="form-control" />
+                            <label asp-for="STFSTUDFNAME"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDLNAME" class="form-control" />
+                            <label asp-for="STFSTUDLNAME"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDMNAME" class="form-control" />
+                            <label asp-for="STFSTUDMNAME"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDCOURSE" class="form-control" />
+                            <label asp-for="STFSTUDCOURSE"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDYEAR" class="form-control" />
+                            <label asp-for="STFSTUDYEAR"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDREMARKS" class="form-control" />
+                            <label asp-for="STFSTUDREMARKS"></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3 form-floating">
+                            <input asp-for="STFSTUDSTATUS" class="form-control" />
+                            <label asp-for="STFSTUDSTATUS"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 form-floating" hidden>
+                <input asp-for="STFSTUDID" class="form-control" />
+                <label asp-for="STFSTUDID"></label>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 mt-3 text-center">
+                            <button type="submit" class="btn-lg btn-success" style="width: 200px">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
